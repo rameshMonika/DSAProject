@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Route</title>
+</head>
+<body>
+    <form id="routeForm">
+        <label for="source">Source Airport:</label>
+        <input type="text" id="source" name="source" placeholder="Enter source airport (e.g., SIN)">
+        <br>
+        <label for="destination">Destination Airport:</label>
+        <input type="text" id="destination" name="destination" placeholder="Enter destination airport (e.g., YVR)">
+        <br>
+        <button type="submit">Get Route</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('routeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/get_route?' + new URLSearchParams(formData))
+                .then(response => response.json())
+                .then(data => {
+                    print("CLicked")
+                    var output = document.getElementById('output');
+                    output.innerHTML = ''; // Clear previous results
+                    if (data.length > 0) {
+                        var route = data[0];
+                        output.innerHTML = `<h2>Route Details</h2>
+                                            <p>Source Airport: ${route['Source airport']}</p>
+                                            <p>Destination Airport: ${route['Destination airport']}</p>
+                                            <p>Distance: ${route['Distance']} km</p>`;
+                    } else {
+                        output.innerText = 'Route not found.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
