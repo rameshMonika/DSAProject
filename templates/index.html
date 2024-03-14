@@ -75,15 +75,24 @@
                                 console.log("-------------- --------------")
                                 console.log(route)
                                 console.log("--------------------")
+                                var routeInfo = '';
+                                for (let j = 0; j < route.length - 1; j++) {
+                                    routeInfo += route[j];
+                                    if (j < route.length - 2) {
+                                        routeInfo += ' -> '
+
+                                    }
+
+                                }
 
                                 var codeBlock = `<div class="card w-50 mb-2">
             <div class="card-body">
                 <h5 class="card-title">Source Airport: ${route[0]}</h5>
                 <h5 class="card-title">Destination Airport: ${route[route.length - 2]}</h5>
                 <p class="card-text">Distance: ${route[route.length - 1]} km</p>
-              
+                <p class="card-text">Route: ${routeInfo}</p>
           
-                <a href="#" class="btn btn-primary">Button</a>
+                <a href="#" class="btn btn-primary">View More</a>
             </div>
         </div>`;
 

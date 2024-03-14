@@ -148,6 +148,7 @@ def get_flight_routes(origin, destination, max_layovers, airports):
                     dest_coords = airports[dest_iata]['coords']
                     distance = calculate_distance(origin_coords[0], origin_coords[1], dest_coords[0], dest_coords[1])
                     total_distance += distance
+                
                 route.append(total_distance)
                 result_routes.append(route)
             return result_routes
